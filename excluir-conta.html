@@ -22,10 +22,10 @@
 </head>
 <body>
 <main>
-<nav><a href="index.html">Início / Home</a><a href="privacidade.html">Privacidade / Privacy</a><a href="termos.html">Termos / Terms</a></nav>
-<div class="langbar" role="group" aria-label="Idioma / Language"><button type="button" data-l="pt">Português</button><button type="button" data-l="en">English</button></div>
+<nav><a href="index.html" data-pt="Início" data-en="Home" data-es="Inicio">Início</a><a href="privacidade.html" data-pt="Privacidade" data-en="Privacy" data-es="Privacidad">Privacidade</a><a href="termos.html" data-pt="Termos" data-en="Terms" data-es="Términos">Termos</a></nav>
+<div class="langbar" role="group" aria-label="Idioma / Language / Idioma"><button type="button" data-l="pt">Português</button><button type="button" data-l="en">English</button><button type="button" data-l="es">Español</button></div>
 
-<section id="pt">
+<section id="pt" data-title="Excluir conta e dados – Titan Arena">
 <h1>Excluir conta e dados</h1>
 <div class="meta">Titan Arena · Atualizado em 12 de novembro de 2026</div>
 <p>Esta página explica como pedir a exclusão da sua conta do <strong>Titan Arena</strong> e dos dados associados a ela.</p>
@@ -65,7 +65,7 @@
 <p>Mais detalhes na <a href="privacidade.html">Política de Privacidade</a>. Dúvidas: <a href="mailto:titanarenasuporte@gmail.com">titanarenasuporte@gmail.com</a>.</p>
 </section>
 
-<section id="en">
+<section id="en" data-title="Delete account and data – Titan Arena">
 <h1>Delete account and data</h1>
 <div class="meta">Titan Arena · Updated on November 12, 2026</div>
 <p>This page explains how to request deletion of your <strong>Titan Arena</strong> account and the data associated with it.</p>
@@ -104,6 +104,45 @@
 
 <p>More details in the <a href="privacidade.html#en">Privacy Policy</a>. Questions: <a href="mailto:titanarenasuporte@gmail.com">titanarenasuporte@gmail.com</a>.</p>
 </section>
+<section id="es" data-title="Eliminar cuenta y datos – Titan Arena">
+<h1>Eliminar cuenta y datos</h1>
+<div class="meta">Titan Arena · Actualizado el 12 de noviembre de 2026</div>
+<p>Esta página explica cómo pedir la eliminación de tu cuenta de <strong>Titan Arena</strong> y de los datos asociados a ella.</p>
+
+<h2>Cómo pedir la eliminación</h2>
+<p><strong>Opción 1 – desde la app:</strong></p>
+<ol>
+  <li>Abre Titan Arena e inicia sesión en tu cuenta.</li>
+  <li>Toca <strong>Perfil</strong> y luego <strong>Ajustes</strong>.</li>
+  <li>En la sección <strong>Privacidad y seguridad</strong>, toca <strong>Solicitar</strong>, junto a &ldquo;Eliminar cuenta y datos&rdquo;, y confirma.</li>
+</ol>
+<p>La solicitud queda registrada y nuestro equipo borra la cuenta y los datos. Mientras la solicitud esté pendiente, puedes cancelarla en el mismo lugar.</p>
+<p><strong>Opción 2 – por correo:</strong> escribe a <a href="mailto:titanarenasuporte@gmail.com">titanarenasuporte@gmail.com</a> con el asunto &ldquo;Eliminar cuenta&rdquo;, usando el correo de la cuenta con la que entraste.</p>
+
+<h2>Qué se elimina</h2>
+<ul>
+  <li>Cuenta y datos de acceso (nombre, correo e identificador de la cuenta).</li>
+  <li>Perfil: nombre para mostrar y género.</li>
+  <li>Entrenamientos y progreso: repeticiones, duración, resultados de batallas y duelos, estrellas, XP, nivel, rango, logros, atributos de REX, progreso en la campaña e historial.</li>
+  <li>Carreras: tiempo, distancia, ritmo y recorrido, si se guardó.</li>
+  <li>Preferencias y ajustes guardados en la cuenta.</li>
+</ul>
+
+<h2>Qué se puede conservar</h2>
+<ul>
+  <li>Datos que la ley nos obliga a conservar (por ejemplo, registros para cumplir obligaciones legales o resolver disputas), solo por el plazo exigido.</li>
+  <li>Los registros de pago de suscripciones quedan con <strong>Google Play</strong>, que es quien procesa los pagos; nosotros no los guardamos.</li>
+  <li>Las copias de seguridad pueden tardar un poco más en borrarse por completo.</li>
+</ul>
+
+<h2>Plazo</h2>
+<p>Borramos la cuenta y los datos en un máximo de 30 días después de la solicitud. La eliminación es definitiva: después no es posible recuperar el progreso, el XP ni el rango.</p>
+
+<h2>Datos que quedan solo en tu celular</h2>
+<p>La foto de perfil y algunas preferencias quedan solo en el dispositivo. Para borrarlas, quita la foto en Ajustes o desinstala la app.</p>
+
+<p>Más detalles en la <a href="privacidade.html">Política de Privacidad</a>. Dudas: <a href="mailto:titanarenasuporte@gmail.com">titanarenasuporte@gmail.com</a>.</p>
+</section>
 </main>
 <script>
 (function () {
@@ -122,7 +161,8 @@
   function show(l, save) {
     Object.keys(secs).forEach(function (k) { secs[k].hidden = k !== l; });
     btns.forEach(function (b) { b.className = b.getAttribute('data-l') === l ? 'on' : ''; });
-    links.forEach(function (a) { a.href = a.getAttribute('href').split('#')[0] + '#' + l; });
+    links.forEach(function (a) { a.href = a.getAttribute('href').split('#')[0] + '#' + l; var t = a.getAttribute('data-' + l); if (t) a.textContent = t; });
+    var st = secs[l].getAttribute('data-title'); if (st) document.title = st;
     document.documentElement.lang = l === 'pt' ? 'pt-BR' : l;
     if (save) { try { localStorage.setItem('legalLang', l); } catch (e) {} try { history.replaceState(null, '', '#' + l); } catch (e) {} }
   }
